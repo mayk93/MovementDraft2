@@ -44,8 +44,6 @@ public class PlayerController : MonoBehaviour
 
     void Aim()
     {
-        print("Here");
-
         // Create a ray from the mouse cursor on screen in the direction of the camera.
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -89,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
         currentNumber = 0;
 
-        player = GameObject.Find("Player").transform.GetComponentInChildren<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform.GetComponentInChildren<Animator>();
 
         player.speed = 1f;
         player.Play(animClipNameGroup[currentNumber]);
