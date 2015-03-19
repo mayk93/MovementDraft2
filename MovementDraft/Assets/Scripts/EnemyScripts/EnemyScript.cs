@@ -4,26 +4,15 @@ using System.Collections;
 public class EnemyScript : MonoBehaviour 
 {
     private Animator player;
-    private string[] animClipNameGroup;
-    private int currentNumber;
-
+    private string animationName;
 	// Use this for initialization
 	void Start () 
     {
-        animClipNameGroup = new string[] 
-        {
-			//"Basic_Walk_02",
-            "Etc_Walk_Zombi_01"
-		};
-
-        currentNumber = 0;
-
-        player = GameObject.Find("Zombie").transform.GetComponentInChildren<Animator>(); /* Refactor: Find via tag */
-
+        animationName = "Etc_Walk_Zombi_01";
+        player = GameObject.FindGameObjectWithTag("Enemy").transform.GetComponentInChildren<Animator>();
         player.speed = 1f;
-        player.Play(animClipNameGroup[currentNumber]);
+        player.Play(animationName);
 	}
-	
 	// Update is called once per frame
 	void Update () {}
 }

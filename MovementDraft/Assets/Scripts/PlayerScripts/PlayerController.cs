@@ -14,17 +14,20 @@ public class PlayerController : MonoBehaviour
 
     /* Animations */
     private Animator player;
-    private string[] animClipNameGroup;
-    private int currentNumber;
+    private string animationName;
+
+    /* Player Model Reference */
+    private PlayerModel playerModel;
 
     void Awake()
     {
         // Create a layer mask for the floor layer.
         floorMask = LayerMask.GetMask("Floor");
-
         // Set up references.
         anim = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
+        // Get reference to player model
+        playerModel = GetComponent<PlayerModel>();
     }
 
 	// Use this for initialization
@@ -46,22 +49,17 @@ public class PlayerController : MonoBehaviour
     {
         // Create a ray from the mouse cursor on screen in the direction of the camera.
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         // Create a RaycastHit variable to store information about what was hit by the ray.
         RaycastHit floorHit;
-
         // Perform the raycast and if it hits something on the floor layer...
         if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
         {
             // Create a vector from the player to the point on the floor the raycast from the mouse hit.
             Vector3 playerToMouse = floorHit.point - transform.position;
-
             // Ensure the vector is entirely along the floor plane.
             playerToMouse.y = 0f;
-
             // Create a quaternion (rotation) based on looking down the vector from the player to the mouse.
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-
             // Set the player's rotation to this new rotation.
             playerRigidbody.MoveRotation(newRotation);
         }
@@ -70,26 +68,31 @@ public class PlayerController : MonoBehaviour
     {
         // Set the movement vector based on the axis input.
         movement.Set(h, 0f, v);
-
         // Normalise the movement vector and make it proportional to the speed per second.
         movement = movement.normalized * speed * Time.deltaTime;
-
         // Move the player to it's current position plus the movement.
         playerRigidbody.MovePosition(transform.position + movement);
     }
 
     void Animation()
     {
-        animClipNameGroup = new string[] 
-        {
-			"Basic_Run_02",
-		};
-
-        currentNumber = 0;
-
+        animationName = "Basic_Run_02";
         player = GameObject.FindGameObjectWithTag("Player").transform.GetComponentInChildren<Animator>();
-
         player.speed = 1f;
-        player.Play(animClipNameGroup[currentNumber]);
+        player.Play(animationName);
+    }
+
+    public bool isDead()
+    {
+        if(playerModel.currentHealth <= 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void applyDamage(Damage damage)
+    {
+        playerModel.currentHealth -= damage.baseDamage;
     }
 }
