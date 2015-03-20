@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour 
+public class EnemySpawner : Singleton<PlayerInstantiator>  
 {
     private PlayerController playerController;
 

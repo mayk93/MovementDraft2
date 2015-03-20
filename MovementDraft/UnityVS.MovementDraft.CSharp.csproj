@@ -56,10 +56,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraScripts\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Damage.cs" />
-    <Compile Include="Assets\Scripts\EnemyScripts\EnemyAttack.cs" />
-    <Compile Include="Assets\Scripts\EnemyScripts\EnemyMovement.cs" />
-    <Compile Include="Assets\Scripts\EnemyScripts\EnemyScript.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\EnemyModel.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\EnemyView.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\Old\EnemyAttack.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\Old\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\Old\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerInstantiator.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerModel.cs" />
