@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
     private string animationName;
     /* --- */
 
+    /* Defines */
+    private string PICKUP = "PickUp";
+    /* --- */
+
     void Awake()
     {
         // Create a layer mask for the floor layer.
@@ -213,6 +217,16 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.transform == enemy)
         {
             enemyInRange = false;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Collider other = collision.collider;
+        if (other.gameObject.tag == PICKUP)
+        {
+            other.gameObject.SetActive(false);
+            /* Collect information about the object before deletion */
         }
     }
 
