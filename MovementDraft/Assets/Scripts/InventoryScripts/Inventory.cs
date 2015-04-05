@@ -20,6 +20,8 @@ public class Inventory : MonoBehaviour
     public GameObject slotPrefab;
 
     private List<GameObject> allSlots;
+
+    private int emptySlots;
     // Use this for initialization
     void Start()
     {
@@ -34,6 +36,8 @@ public class Inventory : MonoBehaviour
         int columns = slots / rows;
 
         allSlots = new List<GameObject>();
+
+        emptySlots = slots;
 
         inventoryWidth = columns * (slotSize + slotPaddingLeft) + slotPaddingLeft;
         inventoryHeight = rows * (slotSize + slotPladdingTop) + slotPladdingTop;
@@ -57,5 +61,43 @@ public class Inventory : MonoBehaviour
                 allSlots.Add(newSlot);
             }
         }
+    }
+
+    public bool AddItem(Item item)
+    {
+        print("The add item method is called.");
+        if(item.maxSize == 1)
+        {
+            PlaceEmpty(item);
+            return true;
+        }
+        return false;
+    }
+
+    private bool PlaceEmpty(Item item)
+    {
+        /* Goes through allSlots till it finds an empty slot */
+        if(emptySlots > 0)
+        {
+            foreach(GameObject slot in allSlots)
+            {
+                Slot temp = slot.GetComponent<Slot>();
+                try
+                {
+                    if (temp.IsEmpty)
+                    {
+                        temp.AddItem(item);
+                        emptySlots--;
+                        return true;
+                    }
+                }
+                catch(UnityException e)
+                {
+                    print(e.ToString());
+                }
+
+            }
+        }
+        return false;
     }
 }

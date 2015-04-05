@@ -48,6 +48,10 @@ public class PlayerController : MonoBehaviour
     private string animationName;
     /* --- */
 
+    /* Inventory Variables */
+    private Inventory inventory;
+    /* --- */
+
     /* Defines */
     private string PICKUP = "PickUp";
     /* --- */
@@ -66,6 +70,8 @@ public class PlayerController : MonoBehaviour
         gunLight = GetComponentInChildren<Light>();
 
         gunAudio = GetComponentInChildren<AudioSource>();
+        /*Get inventory*/
+        inventory = (Inventory)GameObject.FindGameObjectWithTag("Inventory").GetComponent<Inventory>();
     }
 
 	// Use this for initialization
@@ -225,8 +231,11 @@ public class PlayerController : MonoBehaviour
         Collider other = collision.collider;
         if (other.gameObject.tag == PICKUP)
         {
-            other.gameObject.SetActive(false);
-            /* Collect information about the object before deletion */
+            print("Adding item.");
+            inventory.AddItem(other.GetComponent<Item>());
+            print("Added item.");
+
+            //other.gameObject.SetActive(false);
         }
     }
 
