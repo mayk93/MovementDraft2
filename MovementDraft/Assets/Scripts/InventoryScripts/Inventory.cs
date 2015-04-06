@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -21,7 +22,16 @@ public class Inventory : MonoBehaviour
 
     private List<GameObject> allSlots;
 
-    private int emptySlots;
+    private static int emptySlots;
+
+    private Slot from;
+    private Slot to;
+
+    public static int EmptySlots
+    {
+        get { return emptySlots; }
+        set { emptySlots = value; }
+    }
     // Use this for initialization
     void Start()
     {
@@ -29,7 +39,43 @@ public class Inventory : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() { }
+    void Update() 
+    {
+        //AddItems
+    }
+
+    public void MoveItem(GameObject clicked)
+    {
+        if(from == null)
+        {
+            if(!clicked.GetComponent<Slot>().IsEmpty)
+            {
+                from = clicked.GetComponent<Slot>();
+                from.GetComponent<Image>().color = Color.gray;
+            }
+        }
+        else if(to == null)
+        {
+            to = clicked.GetComponent<Slot>();
+        }
+        if (from != null && to != null)
+        {
+            Stack<Item> tempTo = new Stack<Item>(to.Items);
+            to.AddItems(from.Items);
+            if ( tempTo.Count == 0 )
+            {
+                from.ClearSlot();
+            }
+            else
+            {
+                from.AddItems(tempTo);
+            }
+
+            from.GetComponent<Image>().color = Color.white;
+            to = null;
+            from = null;
+        }
+    }
 
     private void CreateLayout()
     {
