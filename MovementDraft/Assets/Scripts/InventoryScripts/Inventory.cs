@@ -65,11 +65,30 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        print("The add item method is called.");
         if(item.maxSize == 1)
         {
             PlaceEmpty(item);
             return true;
+        }
+        else
+        {
+            foreach (GameObject slot in allSlots)
+            {
+                Slot temp = slot.GetComponent<Slot>();
+                if (!temp.IsEmpty)
+                {
+                    if(temp.CurrentItem.type == item.type && temp.IsAvailable)
+                    {
+                        temp.AddItem(item);
+                        return true;
+                    }
+                }
+            }
+            if(emptySlots > 0)
+            {
+                PlaceEmpty(item);
+                return true;
+            }
         }
         return false;
     }

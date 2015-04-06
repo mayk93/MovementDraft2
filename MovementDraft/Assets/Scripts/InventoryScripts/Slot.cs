@@ -10,17 +10,22 @@ public class Slot : MonoBehaviour
     public Sprite slotEmpty;
     public bool IsEmpty
     {
-        get
-        {
-            return items.Count == 0;
-        }
+        get{ return items.Count == 0; }
+    }
+    public bool IsAvailable
+    {
+        get { return CurrentItem.maxSize > items.Count; }
+    }
+    public Item CurrentItem
+    {
+        get { return items.Peek(); }
     }
 	// Use this for initialization
 	void Start () 
     {
         items = new Stack<Item>();
         RectTransform slotRect = GetComponent<RectTransform>();
-        RectTransform textRect = GetComponent<RectTransform>(); /* This should be get component in children */
+        RectTransform textRect = stackText.GetComponent<RectTransform>();
         int textScaleFactor = (int)(slotRect.sizeDelta.x * PERCENT);
 
         stackText.resizeTextMaxSize = textScaleFactor;
