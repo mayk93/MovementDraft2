@@ -26,9 +26,12 @@ public class EnemyView : MonoBehaviour
     {
         healthBarWorldPosition = transform.position + new Vector3(0.0f, 3.0f, 0.0f);
         healthBarScreenPosition = Camera.main.WorldToScreenPoint(healthBarWorldPosition);
-        enemyHealthUI.transform.position = healthBarScreenPosition;
 
-        enemyHealthUI.value = enemyModel.currentHealth/100;
+        if (enemyHealthUI != null)
+        {
+            enemyHealthUI.transform.position = healthBarScreenPosition;
+            enemyHealthUI.value = enemyModel.currentHealth / 100;
+        }
     }
 
     public void Death()

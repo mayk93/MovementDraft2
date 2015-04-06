@@ -231,11 +231,8 @@ public class PlayerController : MonoBehaviour
         Collider other = collision.collider;
         if (other.gameObject.tag == PICKUP)
         {
-            print("Adding item.");
             inventory.AddItem(other.GetComponent<Item>());
-            print("Added item.");
-
-            //other.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
         }
     }
 
