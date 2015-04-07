@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour
     /* --- */
 
     /* Enemy references */
+    private GameObject selectedEnemy;
     private Transform enemy;
+    private GameObject[] enemies;
     private EnemyController enemyController;
     /* --- */
 
@@ -77,16 +79,61 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        selectedEnemy = null;
         Animation();
     }
 
     void Update()
     {
         /* Must find a way to cache it, move it from here */
+        GetEnemy();
+        Action();
+        CheckEffects();
+    }
+
+    void GetEnemy()
+    {
         try
         {
-            enemy = GameObject.FindGameObjectWithTag("Enemy").transform;
-            enemyController = enemy.GetComponent<EnemyController>();
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            int index = (int)UnityEngine.Random.Range(0, enemies.Length - 1);
+            if(selectedEnemy == null)
+            {
+                selectedEnemy =  enemies[index];
+                selectedEnemy.name = "SelectedEnemy";
+                enemy = selectedEnemy.transform; 
+                enemy.GetComponent<EnemyController>().becomeSelected();
+                enemyController = enemy.GetComponent<EnemyController>();
+            }
+            if(Input.GetKey("f"))
+            {
+                print("F pressed");
+                print("Enemy Secected - F. Secected: " + index.ToString());
+                selectedEnemy.GetComponent<Light>().enabled = false;
+                selectedEnemy.name = "Enemy";
+
+                selectedEnemy =  enemies[index];
+                print(selectedEnemy.name);
+                selectedEnemy.name = "SelectedEnemy";
+
+                print(selectedEnemy.name);
+                selectedEnemy.GetComponent<Light>().enabled = true;
+                enemy = selectedEnemy.transform; 
+                enemyController = enemy.GetComponent<EnemyController>();
+            }
+            print("=====");
+            foreach(GameObject enm in enemies)
+            {
+                print(enm.name.ToString());
+            }
+            print("=====");
+        }
+        catch (Exception e) { }
+    }
+    void Action()
+    {
+        try
+        {
             if (enemy != null)
             {
                 UpdateTimer();
@@ -96,8 +143,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        catch (Exception e) { }
-        CheckEffects();
+        catch (Exception e) { print("In Player Controller action: " + e.ToString()); }
     }
 	// Update is called once per frame
 	void FixedUpdate () 
