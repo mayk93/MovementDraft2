@@ -30,19 +30,23 @@ public class Item : MonoBehaviour
     public Sprite spriteHighlighted;
     public int maxSize;
 
-    public void Use()
+    public virtual void Use()
     {
-        switch (type)
-        {
-            case ItemType.HEALTH:
-                Debug.Log("Used health item.");
-                break;
-            case ItemType.STAMINA:
-                Debug.Log("Used stamina item.");
-                break;
-            default:
-                break;
-        }
+        //switch (type)
+        //{
+        //    case ItemType.HEALTH:
+        //        Debug.Log("Used health item.");
+
+        //        /* To Refactor */
+        //        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().applyHealing(100.0f);
+
+        //        break;
+        //    case ItemType.STAMINA:
+        //        Debug.Log("Used stamina item.");
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
     // Use this for initialization
     void Start() { }

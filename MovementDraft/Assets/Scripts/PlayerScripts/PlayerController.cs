@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         GetEnemyList();
         if(selectedEnemy == null)
         {
-            print("Getting enemy");
+            //print("Getting enemy");
             GetEnemy();
         }
         /* Must find a way to cache it, move it from here */
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             selectedEnemy.GetComponent<EnemyController>().becomeSelected();
             enemy = selectedEnemy.transform;
             enemyController = enemy.GetComponent<EnemyController>();
-            print("Got an enemy");
+            //print("Got an enemy");
         }
     }
 
@@ -217,6 +217,12 @@ public class PlayerController : MonoBehaviour
         playerModel.currentHealth -= damage.baseDamage;
     }
 
+    /* NO!!! */
+    public void applyHealing(float health)
+    {
+        playerModel.currentHealth += health;
+    }
+
     void UpdateTimer()
     {
         timer += Time.deltaTime;
@@ -237,17 +243,6 @@ public class PlayerController : MonoBehaviour
                     //print("Shoot.");
                     Shoot();
                 }
-                else
-                {
-                    print("");
-                    //print("Enemy Controller: "+enemyController.isDead().ToString());
-                    //print("Enemy In Range:"+enemyInRange.ToString());
-                }
-            }
-            else
-            {
-                print("");
-                //print("Time passed: "+timer.ToString()+" out of "+timeBetweenAttacks.ToString());
             }
         }
     }

@@ -27,7 +27,7 @@ public class EnemyView : MonoBehaviour
         checkSelection();
         if(enemyModel.IsSelected == true)
         {
-            print("Selected");
+            //print("Selected");
             enemyHealthUI.enabled = true;
             healthBarWorldPosition = transform.position + new Vector3(0.0f, 3.0f, 0.0f);
             healthBarScreenPosition = Camera.main.WorldToScreenPoint(healthBarWorldPosition);
@@ -40,7 +40,7 @@ public class EnemyView : MonoBehaviour
         }
         else
         {
-            print("No selection");
+            //print("No selection");
             enemyHealthUI.enabled = false;
         }
     }
