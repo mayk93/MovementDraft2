@@ -135,7 +135,7 @@ System.Reflection.ConstructorInfo.Invoke (System.Object[] parameters) (at /Users
                 Slot temp = slot.GetComponent<Slot>();
                 if (!temp.IsEmpty)
                 {
-                    if(temp.CurrentItem.type == item.type && temp.IsAvailable)
+                    if (temp.CurrentItem.GetType() == item.GetType() && temp.IsAvailable)
                     {
                         temp.AddItem(item);
                         return true;
