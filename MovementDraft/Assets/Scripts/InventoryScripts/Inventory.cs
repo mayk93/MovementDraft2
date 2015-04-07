@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Inventory : MonoBehaviour
+public class Inventory : Singleton<Inventory> 
 {
     private RectTransform inventoryRect;
 
@@ -24,8 +25,8 @@ public class Inventory : MonoBehaviour
 
     private static int emptySlots;
 
-    private Slot from;
-    private Slot to;
+    private static Slot from;
+    private static Slot to;
 
     public static int EmptySlots
     {
@@ -39,12 +40,23 @@ public class Inventory : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() 
-    {
-        //AddItems
-    }
+    void Update() {}
 
-    public void MoveItem(GameObject clicked)
+    /* 
+     * In the method "MoveItem(GameObject clicked)",
+     * in it's current form, I get:
+     * 
+     * ---
+     * 
+     * ArgumentException: failed to convert parameters
+System.Reflection.MonoCMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at /Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:484)
+System.Reflection.MonoCMethod.Invoke (BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) (at /Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Reflection/MonoMethod.cs:528)
+System.Reflection.ConstructorInfo.Invoke (System.Object[] parameters) (at /Users/builduser/buildslave/mono-runtime-and-classlibs/build/mcs/class/corlib/System.Reflection/ConstructorInfo.cs:77)
+     * 
+     * ---
+     */
+    //public void MoveItem(GameObject clicked) 
+    public static void MoveItem(GameObject clicked)
     {
         if(from == null)
         {

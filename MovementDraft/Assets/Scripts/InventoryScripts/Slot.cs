@@ -41,12 +41,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
         textRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, slotRect.sizeDelta.x);
         textRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, slotRect.sizeDelta.y);
-
-
     }
 	
 	// Update is called once per frame
-	void Update () {}
+	void Update () 
+    {}
 
     public void AddItem(Item item)
     {
@@ -91,6 +90,10 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            Inventory.MoveItem(gameObject);
+        }
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             UseItem();
