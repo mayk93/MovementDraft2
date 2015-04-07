@@ -29,16 +29,6 @@ public class EnemyController : MonoBehaviour
     private string animationName;
     /* --- */
 
-    /* Secection */
-    private bool isSelected;
-
-    public bool IsSelected
-    {
-        get { return isSelected; }
-        set { isSelected = value; }
-    }
-    /* --- */
-
     void Awake()
     {
         enemyModel = GetComponent<EnemyModel>();
@@ -62,31 +52,20 @@ public class EnemyController : MonoBehaviour
         PathFind();
         DeathCheck();
         UpdateView();
-        checkSelection();
 	}
 
     public void becomeSelected()
     {
         print("Selected");
-        isSelected = true;
+        gameObject.GetComponent<Light>().enabled = true; /* Redundant, I know, dar nu merge cu checkSelection */
+        enemyModel.IsSelected = true;
     }
 
     public void deselect()
     {
         print("De selected");
-        isSelected = false;
-    }
-
-    private void checkSelection()
-    {
-        if ( isSelected == true )
-        {
-            gameObject.GetComponent<Light>().enabled = true;
-        }
-        else
-        {
-            gameObject.GetComponent<Light>().enabled = false;
-        }
+        gameObject.GetComponent<Light>().enabled = false;
+        enemyModel.IsSelected = false;
     }
 
     void UpdateTimer()

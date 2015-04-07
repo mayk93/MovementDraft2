@@ -23,10 +23,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
     }
     void Spawn()
     {
-        print("Spawning.");
+        //print("Spawning enemy: "+numberOfEmemiesSpawned.ToString());
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (playerController.isDead() == true)
         {
+            print("Playeer Dead.");
             return;
         }
         GameObject instance = (GameObject)Instantiate(enemy, spawnPoint, Quaternion.identity);
