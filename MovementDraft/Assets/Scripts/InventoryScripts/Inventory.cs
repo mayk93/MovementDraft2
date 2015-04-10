@@ -23,6 +23,12 @@ public class Inventory : Singleton<Inventory>
 
     private List<GameObject> allSlots;
 
+    public List<GameObject> AllSlots
+    {
+        get { return allSlots; }
+        set { allSlots = value; }
+    }
+
     private static int emptySlots;
 
     private static Slot from;
@@ -56,6 +62,17 @@ System.Reflection.ConstructorInfo.Invoke (System.Object[] parameters) (at /Users
      * ---
      */
     //public void MoveItem(GameObject clicked) 
+
+    public List<Slot> getSlotList()
+    {
+            List<Slot> slotList = new List<Slot>();
+            foreach (GameObject slotGO in allSlots)
+            {
+                slotList.Add(slotGO.GetComponent<Slot>());
+            }
+            return slotList; 
+    }
+
     public static void MoveItem(GameObject clicked)
     {
         if(from == null)

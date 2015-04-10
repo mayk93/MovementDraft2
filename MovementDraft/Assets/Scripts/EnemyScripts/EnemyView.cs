@@ -53,6 +53,9 @@ public class EnemyView : MonoBehaviour
         //GetComponent<EnemyModel>().enabled = false;
         //GetComponent<EnemyView>().enabled = false;
         //GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+        enemyHealthUI.value = 0.0f;
+        enemyHealthUI.enabled = false;
+        enemyHealthUI = null;
         Destroy(gameObject);
         Destroy(enemyHealthUI);
     }

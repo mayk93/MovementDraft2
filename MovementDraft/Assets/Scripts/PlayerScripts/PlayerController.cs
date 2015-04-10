@@ -295,14 +295,14 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        print("On Collision 0");
+        //print("On Collision 0");
         Collider other = collision.collider;
         if (other.gameObject.tag == PICKUP)
         {
-            print("On Collision 1");
+            //print("On Collision 1");
             if (inventory.AddItem(other.GetComponent<Item>()))
             {
-                print("On Collision 2");
+                //print("On Collision 2");
                 other.gameObject.SetActive(false);
             }
         }
